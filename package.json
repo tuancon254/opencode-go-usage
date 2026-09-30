@@ -1,0 +1,47 @@
+{
+  "name": "opencode-go-usage",
+  "version": "0.1.0",
+  "description": "OpenCode TUI plugin that shows your opencode-go usage limits (rolling 5h / weekly / monthly) in the sidebar",
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./tui": "./tui.ts"
+  },
+  "files": [
+    "index.ts",
+    "tui.ts",
+    "usage.ts",
+    "key.ts",
+    "datadir.ts"
+  ],
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "opencode-go",
+    "usage",
+    "quota",
+    "limits",
+    "tui"
+  ],
+  "license": "MIT",
+  "engines": {
+    "opencode": ">=2.0.0"
+  },
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "check": "tsc --noEmit && bun test"
+  },
+  "peerDependencies": {
+    "@opencode/plugin": ">=2.0.0",
+    "@opentui/solid": ">=0.5.10",
+    "solid-js": ">=1.9.0"
+  },
+  "devDependencies": {
+    "@opencode/plugin": "^2.0.20",
+    "@opentui/solid": "0.5.11",
+    "@types/node": "^26.6.3",
+    "solid-js": "1.9.12",
+    "typescript": "^5.9.3"
+  }
+}
