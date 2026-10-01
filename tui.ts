@@ -2,7 +2,6 @@ import { createElement, insert, setProp } from "@opentui/solid"
 import { createTextAttributes } from "@opentui/core"
 import { createSignal } from "solid-js"
 import type { JSX } from "@opentui/solid"
-import { Plugin } from "@opencode/plugin/tui"
 import type { Context } from "@opencode/plugin/tui/context"
 import { dataDirs } from "./datadir.ts"
 import { resolveApiKey } from "./key.ts"
@@ -66,9 +65,16 @@ function padStart(value: string, width: number): string {
   return value.length >= width ? value : " ".repeat(width - value.length) + value
 }
 
-export default Plugin.define({
+/**
+ * `Plugin.define` from `@opencode/plugin/tui` is the identity function
+ * (`define(plugin) { return plugin }`), so this object literal is already the
+ * shape the TUI expects. Not importing it keeps `@opencode/plugin` — and the
+ * ~130MB of effect/redis/opentelemetry behind it — out of the install; the
+ * `Context` type below is type-only and erased at build time.
+ */
+export default {
   id: "opencode-usage-go",
-  async setup(context) {
+  async setup(context: Context) {
     const refreshMs = typeof context.options.refreshMs === "number" ? context.options.refreshMs : 30_000
     const timeoutMs = typeof context.options.timeoutMs === "number" ? context.options.timeoutMs : 10_000
     // Options let the auth store be pointed somewhere else; without it we
@@ -172,4 +178,4 @@ export default Plugin.define({
       releaseSlot()
     }
   },
-})
+}
